@@ -1,15 +1,15 @@
 // Selectors
-const image = document.querySelector('img');
-const title = document.getElementById('title');
-const artist = document.getElementById('artist');
-const playBtn = document.querySelector(".play-button");
+const image = document.querySelector("img");
+const title = document.getElementById("title");
+const artist = document.getElementById("artist");
 const music = document.querySelector("audio");
-const nextBtn = document.getElementById('next');
-const prevBtn = document.getElementById('previous');
-const progressContainer = document.getElementById('progress-container');
-const progress = document.getElementById('progress');
-const currentTimeEl = document.getElementById('time');
-const durationEl = document.getElementById('duration');
+const playBtn = document.getElementById("play-button");
+const nextBtn = document.getElementById("next");
+const prevBtn = document.getElementById("previous");
+const progressContainer = document.getElementById("progress-container");
+const progress = document.getElementById("progress");
+const currentTimeEl = document.getElementById("time");
+const durationEl = document.getElementById("duration");
 
 // Songs
 const songs = [
@@ -55,6 +55,16 @@ function pauseSong() {
 
 let songIndex = 0;
 
+// Previous Song
+function previousSong() {
+  songIndex--;
+  if (songIndex < 0) {
+    songIndex = songs.length - 1
+  }
+  loadSong(songs[songIndex]);
+  playSong();
+}
+
 // Next Song
 function nextSong() {
   songIndex++;
@@ -65,51 +75,27 @@ function nextSong() {
   playSong();
 }
 
-// Previous Song
-function previousSong() {
-  songIndex--;
-  if (songIndex <= 0) {
-    songIndex = songs.length - 1
-  }
-  loadSong(songs[songIndex]);
-  playSong();
-}
-
-// function changeSong(e) {
-//   if (e.id === 'next') {
-//     songIndex++;
-//     if (songIndex > songs.length - 1) {
-//       songIndex = 0;
-//     }
-//     loadSong(songs([songIndex]));
-//     playSong();
-//   }
-// }
-
 // Progress Bar
-function updateProgress(e) {
+function updateProgressBar(e) {
   if (isPlaying) {
     const { duration, currentTime } = e.srcElement;
     const progressPercent = (currentTime / duration) * 100;
     progress.style.width = `${progressPercent}%`;
 
-    const durationMin = Math.floor(duration / 60);
-    let durationSec = Math.floor(duration % 60);
-    if (durationSec < 10) {
-      durationSec = `0${durationSec}`;
+    const durationMinutes = Math.floor(duration / 60);
+    let durationSeconds = Math.floor(duration % 60);
+    if (durationSeconds < 10) {
+      durationSeconds = `0${durationSeconds}`;
     }
-    if (durationSec) {
-      durationEl.textContent = `${durationMin}:${durationSec}`;
+    if (durationSeconds) {
+      durationEl.textContent = `${durationMinutes}:${durationSeconds}`;
     }
-    let currentMin = Math.floor(currentTime / 60);
-    let currentSec = Math.floor(currentMin % 60);
-    // if (currentMin < 1) {
-    //   currentMin = '0'
-    // }
-    if (currentSec < 10) {
-      currentSec = `0${currentSec}`;
+    const currentMinutes = Math.floor(currentTime / 60);
+    let currentSeconds = Math.floor(currentTime % 60);
+    if (currentSeconds < 10) {
+      currentSeconds = `0${currentSeconds}`;
     }
-    currentTimeEl.textContent = `${currentMin}:${currentSec}`;
+    currentTimeEl.textContent = `${currentMinutes}:${currentSeconds}`;
   }
 }
 
@@ -130,12 +116,12 @@ function loadSong(song) {
 }
 
 // Select InitialSong
-loadSong(songs[songIndex]);
+loadSong(songs[songIndex]); 1
 
 // Event Listeners
-playBtn.addEventListener('click', () => (isPlaying ? pauseSong() : playSong()));
-nextBtn.addEventListener('click', nextSong);
-prevBtn.addEventListener('click', previousSong);
-music.addEventListener('timeupdate', updateProgress);
+prevBtn.addEventListener("click", previousSong);
+playBtn.addEventListener("click", () => (isPlaying ? pauseSong() : playSong()));
+nextBtn.addEventListener("click", nextSong);
+music.addEventListener("timeupdate", updateProgressBar);
 music.addEventListener("ended", nextSong);
 progressContainer.addEventListener("click", setProgressBar);
