@@ -1,0 +1,102 @@
+html {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+}
+
+.music-player-container {
+  height: 500px;
+  width: 500px;
+  background: rgba(94, 94, 94, 0.786);
+  border-radius: 16px;
+  box-shadow: 0 15px 25px 5px rgba(0, 0, 0, 0.395);
+}
+
+.image-container {
+  height: 300px;
+  width: 300px;
+  position: relative;
+  top: -50px;
+  left: 100px;
+}
+
+img {
+  height: 100%;
+  width: 100%;
+  border-radius: 16px;
+  object-fit: cover;
+  box-shadow: 0 5px 30px 5px rgba(0, 0, 0, 0.5);
+}
+
+h2 {
+  font-size: 25px;
+  text-align: center;
+  margin: 0;
+}
+
+h3 {
+  font-size: 20px;
+  text-align: center;
+  font-weight: 400;
+  margin: 5px 0 0;
+}
+
+.progress-container {
+  background: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 40px 20px;
+  height: 5px;
+  width: 90%;
+}
+
+.progress {
+  background: aquamarine;
+  border-radius: 5px;
+  height: 100%;
+  width: 25%;
+  transition: width 0.1s linear;
+}
+
+.duration-container {
+  position: relative;
+  top: -20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.player-btn-container {
+  position: relative;
+  top: -15px;
+  left: 200px;
+  width: 500px;
+  user-select: none;
+}
+
+.icon {
+  font-size: 30px;
+  color: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.icon:hover {
+  color: aquamarine;
+}
+
+.play-button {
+  font-size: 42px;
+  position: relative;
+  top: 3px;
+}
